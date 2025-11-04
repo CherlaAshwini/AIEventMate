@@ -36,6 +36,7 @@ useEffect(() => {
           <thead>
             <tr>
               <th>Hall</th>
+              <th>City</th>
               <th>Booked By</th>
               <th>Date</th>
             </tr>
@@ -44,6 +45,7 @@ useEffect(() => {
             {bookings.map((b) => (
               <tr key={b.id}>
                 <td>{b.hall}</td>
+                <td>{b.hallCity}</td>
                 <td>{b.bookedBy}</td>
                 <td>{b.date}</td>
                 

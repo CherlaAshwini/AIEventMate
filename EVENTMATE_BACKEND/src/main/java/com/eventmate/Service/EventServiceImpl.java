@@ -1,5 +1,6 @@
 package com.eventmate.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,22 @@ public class EventServiceImpl implements EventService{
 			}
 		}
 		return list;
+	}
+	@Override
+	public Event getEventById(Integer id) {
+		// TODO Auto-generated method stub
+		return eventRepo.findById(id).orElse(null);
+	}
+	@Override
+	public List<Event> eventsList() {
+		// TODO Auto-generated method stub
+		return eventRepo.findAll();
+	}
+	@Override
+	public boolean isVenueBooked(Integer venueId, LocalDate eventDate) {
+		// TODO Auto-generated method stub
+		return eventRepo.existsByEventVenue_VenueIdAndEventDateAndEventStatus(venueId, eventDate, "active");
+
 	}
 
 }

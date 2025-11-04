@@ -161,42 +161,13 @@ import axios from "axios";
 import React, { useState } from "react";
 
 const stateCityMap = {
-  AndhraPradesh: ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore", "Tirupati"],
-  ArunachalPradesh: ["Itanagar", "Tawang", "Ziro", "Pasighat"],
-  Assam: ["Guwahati", "Dibrugarh", "Silchar", "Jorhat"],
-  Bihar: ["Patna", "Gaya", "Muzaffarpur", "Bhagalpur"],
-  Chhattisgarh: ["Raipur", "Bhilai", "Bilaspur", "Korba"],
-  Delhi: ["New Delhi", "Dwarka", "Rohini", "Saket"],
-  Goa: ["Panaji", "Margao", "Vasco da Gama", "Mapusa"],
-  Gujarat: ["Ahmedabad", "Surat", "Vadodara", "Rajkot"],
-  Haryana: ["Gurugram", "Faridabad", "Panipat", "Karnal"],
-  HimachalPradesh: ["Shimla", "Manali", "Dharamshala", "Solan"],
-  Jharkhand: ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro"],
-  Karnataka: ["Bengaluru", "Mysuru", "Mangalore", "Hubballi"],
-  Kerala: ["Kochi", "Thiruvananthapuram", "Kozhikode", "Thrissur"],
-  MadhyaPradesh: ["Bhopal", "Indore", "Gwalior", "Jabalpur"],
-  Maharashtra: ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad"],
-  Manipur: ["Imphal", "Thoubal", "Bishnupur"],
-  Meghalaya: ["Shillong", "Tura", "Jowai"],
-  Mizoram: ["Aizawl", "Lunglei", "Champhai"],
-  Nagaland: ["Kohima", "Dimapur", "Wokha"],
-  Odisha: ["Bhubaneswar", "Cuttack", "Rourkela", "Puri"],
-  Punjab: ["Ludhiana", "Amritsar", "Jalandhar", "Patiala"],
-  Rajasthan: ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Ajmer"],
-  Sikkim: ["Gangtok", "Namchi", "Pelling"],
-  TamilNadu: ["Chennai", "Coimbatore", "Madurai", "Salem", "Tiruchirappalli"],
-  Telangana: ["Hyderabad", "Warangal", "Nizamabad", "Khammam"],
-  Tripura: ["Agartala", "Udaipur", "Dharmanagar"],
-  UttarPradesh: ["Lucknow", "Kanpur", "Varanasi", "Noida", "Agra"],
-  Uttarakhand: ["Dehradun", "Haridwar", "Rishikesh", "Nainital"],
-  WestBengal: ["Kolkata", "Howrah", "Siliguri", "Durgapur"],
-  Chandigarh: ["Chandigarh"],
-  JammuKashmir: ["Srinagar", "Jammu", "Anantnag", "Baramulla"],
-  Ladakh: ["Leh", "Kargil"],
-  Puducherry: ["Pondicherry", "Karaikal", "Mahe"],
-  AndamanNicobar: ["Port Blair", "Diglipur", "Rangat"],
-  Lakshadweep: ["Kavaratti", "Agatti", "Minicoy"],
+  Telangana: ["Hyderabad"],
+  TamilNadu: ["Chennai"],
+  Karnataka: ["Bengaluru"],
+  Maharashtra: ["Mumbai"],
+  Delhi: ["Delhi"]
 };
+
 
 const AddHall = () => {
   const [openModal, setOpenModal] = useState(false);

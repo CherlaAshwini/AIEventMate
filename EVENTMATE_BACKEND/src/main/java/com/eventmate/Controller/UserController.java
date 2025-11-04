@@ -59,33 +59,25 @@ public class UserController {
 	
 	@GetMapping("/count")
 	public Integer getUsersCount() {
-		return 450;//sample checking
+		
+		return userService.getUsersList().size();//sample checking
 	}
 	 @GetMapping("/all")
 	    public List<Map<String, Object>> getAllUsers() {
 	        List<Map<String, Object>> users = new ArrayList<>();
 
-	        users.add(Map.of(
-	            "id", 1,
-	            "name", "Alice Johnson",
-	            "email", "alice@mail.com",
-	            "status", "active"
-	        ));
-
-	        users.add(Map.of(
-	            "id", 2,
-	            "name", "Bob Smith",
-	            "email", "bob@mail.com",
-	            "status", "blocked"
-	        ));
-
-	        users.add(Map.of(
-	            "id", 3,
-	            "name", "Charlie Kumar",
-	            "email", "charlie@mail.com",
-	            "status", "active"
-	        ));
-
+	        for(User u:userService.getUsersList()) {
+	        	users.add(Map.of(
+	    	            "id", u.getUserId(),
+	    	            "name", u.getUserFullName(),
+	    	            "email", u.getUserEmail(),
+	    	            "mobile",u.getUserMobile(),
+	    	            "state",u.getUserState(),
+	    	            "city",u.getUserCity()
+	    	            
+	    	        ));
+	        }
+	        
 	        return users;
 	    }
 }

@@ -1,20 +1,26 @@
 
 
+
 // import React, { useEffect, useState } from "react";
 // import axios from "axios";
 // import Chatbot from "./Chatbot";
 // import { useNavigate } from "react-router-dom";
 
 // const DashboardOverview = () => {
-//   const [user, setUser] = useState({ name: "Guest", profilePic: "/default-profile.png" });
+//   const [user, setUser] = useState({
+//     name: "Guest",
+//     profilePic: "/default-profile.png",
+//     id: null,
+//   });
 //   const [showChatbot, setShowChatbot] = useState(false);
 //   const [showRatingDialog, setShowRatingDialog] = useState(false);
 //   const [hallName, setHallName] = useState("");
 //   const [rating, setRating] = useState(0);
 //   const [message, setMessage] = useState("");
+//   const [stats, setStats] = useState({ upcoming: 0 });
 //   const navigate = useNavigate();
 
-//   // ✅ Fetch user session from backend instead of localStorage
+//   // ✅ Fetch user session from backend
 //   useEffect(() => {
 //     const fetchUserSession = async () => {
 //       try {
@@ -23,23 +29,45 @@
 //         });
 
 //         if (response.data && Object.keys(response.data).length > 0) {
+//           const userData = response.data;
 //           setUser({
-//             name: response.data.userFullName || "User",
-//             profilePic: response.data.userImageURL || "/default-profile.png",
+//             name: userData.userFullName || "User",
+//             profilePic: userData.userImageURL || "/default-profile.png",
+//             id: userData.userId, // ✅ Store ID for next API call
 //           });
 //         } else {
-//           navigate("/"); // redirect if session is invalid
+//           navigate("/");
 //         }
 //       } catch (error) {
-//         navigate("/"); // redirect if 401 or connection fails
+//         navigate("/");
 //       }
 //     };
 
 //     fetchUserSession();
 //   }, [navigate]);
 
-//   const stats = { upcoming: 2 };
+//   // ✅ Fetch events using userId
+//   useEffect(() => {
+//     const fetchUserEvents = async () => {
+//       if (user.id) {
+//         try {
+//           const response = await axios.get(`http://localhost:8080/event/get/${user.id}`);
+//           const userEvents = response.data || [];
+//            userEvents.forEach((event, index) => {
+//           console.log(`Event ${index + 1}:`, event);
+//         });
 
+//           setStats({ upcoming: userEvents.length }); // count total events
+//         } catch (error) {
+//           console.error("Error fetching events:", error);
+//         }
+//       }
+//     };
+
+//     fetchUserEvents();
+//   }, [user.id]);
+
+//   // ✅ Handle Rating Submit
 //   const handleRatingSubmit = (e) => {
 //     e.preventDefault();
 //     if (!hallName || rating === 0) {
@@ -91,7 +119,7 @@
 //         </div>
 //       </div>
 
-//       {/* ✅ Chatbot Dialog */}
+//       {/* Chatbot Dialog */}
 //       {showChatbot && (
 //         <div className="chatbot-dialog">
 //           <div className="chatbot-dialog-content">
@@ -106,7 +134,7 @@
 //         </div>
 //       )}
 
-//       {/* ✅ Rating Dialog Box */}
+//       {/* Rating Dialog */}
 //       {showRatingDialog && (
 //         <div className="chatbot-dialog">
 //           <div className="chatbot-dialog-content">
@@ -175,6 +203,7 @@
 // export default DashboardOverview;
 
 
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Chatbot from "./Chatbot";
@@ -192,6 +221,7 @@ const DashboardOverview = () => {
   const [rating, setRating] = useState(0);
   const [message, setMessage] = useState("");
   const [stats, setStats] = useState({ upcoming: 0 });
+  const [imageError, setImageError] = useState(false); // ✅ Added for safe image rendering
   const navigate = useNavigate();
 
   // ✅ Fetch user session from backend
@@ -202,18 +232,21 @@ const DashboardOverview = () => {
           withCredentials: true,
         });
 
-        if (response.data && Object.keys(response.data).length > 0) {
-          const userData = response.data;
+        const userData = response.data;
+
+        if (userData && Object.keys(userData).length > 0) {
           setUser({
             name: userData.userFullName || "User",
             profilePic: userData.userImageURL || "/default-profile.png",
-            id: userData.userId, // ✅ Store ID for next API call
+            id: userData.userId || null,
           });
+          setImageError(false);
         } else {
-          navigate("/");
+          navigate("/auth");
         }
       } catch (error) {
-        navigate("/");
+        console.error("Error fetching session:", error);
+        navigate("/auth");
       }
     };
 
@@ -227,9 +260,8 @@ const DashboardOverview = () => {
         try {
           const response = await axios.get(`http://localhost:8080/event/get/${user.id}`);
           const userEvents = response.data || [];
-           userEvents.forEach((event, index) => {
-          console.log(`Event ${index + 1}:`, event);
-        });
+
+          console.log("Fetched events:", userEvents);
 
           setStats({ upcoming: userEvents.length }); // count total events
         } catch (error) {
@@ -259,9 +291,10 @@ const DashboardOverview = () => {
       {/* Profile Section */}
       <div className="profile-header">
         <img
-          src={user.profilePic || "/default-profile.png"}
+          src={imageError ? "/default-profile.png" : user.profilePic}
           alt="Profile"
           className="profile-pic"
+          onError={() => setImageError(true)} // ✅ fallback for invalid URLs
         />
         <h2>Welcome, {user.name} 👋</h2>
       </div>
@@ -375,3 +408,4 @@ const DashboardOverview = () => {
 };
 
 export default DashboardOverview;
+

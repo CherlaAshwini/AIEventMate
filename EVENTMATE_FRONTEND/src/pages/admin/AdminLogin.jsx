@@ -16,7 +16,7 @@ const AdminLogin = () => {
       const response = await fetch("http://localhost:8080/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // important for session
+        credentials: "include",
         body: JSON.stringify({
           adminEmail: formData.adminEmail,
           adminPassword: formData.adminPassword,
@@ -59,6 +59,15 @@ const AdminLogin = () => {
             required
           />
           <button type="submit">Login</button>
+
+          {/* ✅ Home Button (Same Style, Below Login) */}
+          <button
+            type="button"
+            onClick={() => navigate("/")}
+            style={{ marginTop: "10px" }}
+          >
+            Home
+          </button>
         </form>
       </div>
     </div>

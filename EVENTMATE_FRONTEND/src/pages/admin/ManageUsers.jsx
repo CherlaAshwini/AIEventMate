@@ -48,7 +48,9 @@ const ManageUsers = () => {
             <tr>
               <th>Name</th>
               <th>Email</th>
-              <th>Status</th>
+              <th>Mobile</th>
+              <th>State</th>
+              <th>City</th>
               {/* <th>Action</th> */}
             </tr>
           </thead>
@@ -57,14 +59,17 @@ const ManageUsers = () => {
               <tr key={u.id}>
                 <td>{u.name}</td>
                 <td>{u.email}</td>
-                <td
+                <td>{u.mobile}</td>
+                <td>{u.state}</td>
+                <td>{u.city}</td>
+                {/* <td
                   style={{
                     color: u.status === "active" ? "green" : "red",
                     fontWeight: "500",
                   }}
                 >
                   {u.status}
-                </td>
+                </td> */}
                 {/* <td>
                   <button
                     className="approve-btn"
