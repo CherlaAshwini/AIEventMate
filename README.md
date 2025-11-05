@@ -1,9 +1,4 @@
-Here’s a professional, well-structured **`README.md`** for your **Event Mate** full-stack project — ready to upload to GitHub.
-It includes all essential technical, setup, and documentation sections.
 
----
-
-```markdown
 # 🎉 Event Mate – Full Stack Event Management Platform
 
 ## 📘 Overview
