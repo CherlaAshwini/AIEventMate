@@ -182,10 +182,6 @@ Frontend (React)  <—>  Backend (Spring Boot REST API)  <—>  Database (MySQL)
 
 ---
 
-## 👨‍💻 Contributors
-
-* **[K Naveen Kumar]** – Full Stack Developer
-
 
 
 ## 📎 License
